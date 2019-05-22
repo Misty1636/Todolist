@@ -1,0 +1,166 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/variables";
+@import "~bootstrap/scss/bootstrap";
+
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+@mixin title {
+  font-family: "Roboto Medium", sans-serif;
+  font-size: 24px;
+}
+
+@mixin subtitle {
+  font-family: "Roboto Medium", sans-serif;
+  font-size: 20px;
+}
+
+@mixin paragraph {
+  font-family: "Roboto Regular", sans-serif;
+  font-size: 16px;
+}
+
+@mixin status-italic {
+  font-family: "Roboto Italic", sans-serif;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.nav-menu {
+  font-size: 24px;
+  li {
+    border-bottom: 5px solid transparent;
+    color: $darkBlue;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+      color: $white;
+      border-bottom: 5px solid $darkBlue;
+    }
+    &.active {
+      color: $white;
+      border-bottom: 5px solid $darkBlue;
+    }
+  }
+}
+
+.todo-content {
+  background: $darkWhite;
+  min-height: calc(100vh - 89px);
+  .addTask {
+    color: gray-900;
+    @include title;
+  }
+  input::-webkit-input-placeholder {
+    @include subtitle;
+    color: $lighertGray;
+  }
+}
+
+.todo-edit {
+  .edit-body {
+    h4 {
+      @include subtitle;
+    }
+    .files {
+      display: none;
+    }
+    label {
+      cursor: pointer;
+      border-radius: 3px;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background: rgba($lightBlue, 0.85);
+      color: $white;
+      text-align: center;
+      transition: all 0.3s;
+      line-height: 26px;
+      &:hover {
+        background: $lightBlue;
+      }
+    }
+  }
+  .edit-footer {
+    button {
+      @include subtitle;
+    }
+    .cancel {
+      transition: all 0.3s;
+      &:hover {
+        background: $gray-100;
+      }
+    }
+  }
+}
+
+.todo-edit,
+.todo-item {
+  .title {
+    @include title;
+    &.active{
+      text-decoration: line-through;
+      color: $activeGray;
+    }
+  }
+  .edit-title {
+    border-bottom: 2px solid $darkWhite;
+  }
+  input[type="checkbox"] {
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 24px;
+    height: 12px;
+    position: relative;
+  }
+
+  input[type="checkbox"]:before {
+    position: absolute;
+    transform: translateY(-6px);
+    width: 24px;
+    height: 24px;
+    top: 0;
+    content: " ";
+    background-color: $white;
+    color: $white;
+    display: inline-block;
+    visibility: visible;
+    padding: 0px 3px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+
+  input[type="checkbox"]:checked:before {
+    content: "\2714";
+    background-color: $lightBlue;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .title-icon {
+    font-size: 20px;
+  }
+}
+
+.todo-item {
+  .star,.pencil{
+    color: $black;
+  }
+  .small-icon {
+    @include paragraph;
+    color: $lightGray;
+    padding-left: 37px;
+    .deadline{
+      transform: translateY(1.5px);
+    }
+  }
+}
+
+.star,.fullstar{
+  cursor: pointer;
+}
+
+.statistics{
+  @include status-italic;
+  color: $gray-500;
+}

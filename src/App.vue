@@ -119,7 +119,7 @@
                     <font-awesome-icon icon="pencil-alt" />
                   </a>
                   <a href="#" class="text-secondary"
-                  @click.prevent="removetemtodo(item.id)"><font-awesome-icon icon="trash-alt" /></a>
+                  @click.prevent="removetemtodo(item)"><font-awesome-icon icon="trash-alt" /></a>
                 </div>
               </div>
               <div class="small-icon d-flex">
@@ -181,10 +181,13 @@ export default {
     gettodos() {
       const array = JSON.parse(localStorage.getItem('vuetodos'));
       const sorttodos = [];
-
-      if (!this.drag && array.length === 0) {
+      if (array.length !== 0) {
+        this.drag = true;
+      }
+      if (!this.drag || !array.every(item => item.order)) {
         array.sort((a, b) => (a.id > b.id ? 1 : -1));
-      } else {
+      }
+      if (array.some(item => item.order)) {
         array.sort((a, b) => (a.order > b.order ? 1 : -1));
       }
 
@@ -218,7 +221,7 @@ export default {
     },
     savetodo() {
       const vm = this;
-      const times = Math.floor(Date.now());
+      const times = Date.now();
       if (!vm.isedit) {
         vm.temtodos.id = times;
         if (vm.temtodos.thing.trim() && vm.temtodos.thing !== '請輸入事項') {
